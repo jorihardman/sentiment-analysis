@@ -1,4 +1,6 @@
 # History files
+.bundle
+.rvmrc
 .Rhistory
 
 # Example code in package build process

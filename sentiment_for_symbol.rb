@@ -27,7 +27,7 @@ module SentimentR
   def self.detect_r
     # TODO: actually attempt to detect if R is installed
     case RUBY_PLATFORM
-    when /win32/ 
+    when /win32/
       'C:/Program Files/R'  # probably wrong
     when /linux/
       '/usr/lib/R'
@@ -55,7 +55,7 @@ Note: This is only necessary if plotting to a widget.
     end
     @r.eval_R(fix) if fix
   end
-  
+
   # ----------------------------------------------------------------------
 
 =begin rdoc
@@ -72,7 +72,7 @@ Perform a sentiment analysis using tm.plugins.webmining and tm.plugins.sentiment
       opts.engines.each do |engine|
         terms[term]['engine'] << engine.to_s
 
-        sentiment_query(build_query(engine, term), opts).each do |k,v| 
+        sentiment_query(build_query(engine, term), opts).each do |k,v|
           next if k.to_s == 'MetaID'
           terms[term][k] ||= []
           terms[term][k] += [v].flatten.map { |x| (x.nan?) ? nil : x }
@@ -156,7 +156,7 @@ representing a Table of data) or a pipe-delimited table.
 
       header ||= h.keys.sort - ['engine']
       engines = h['engine']
-      lines += header.map { |k| [h[k]].flatten }.transpose.map { |a| 
+      lines += header.map { |k| [h[k]].flatten }.transpose.map { |a|
                                 a.unshift engines.shift; a.unshift term }
     end
     header.unshift 'engine'
@@ -181,32 +181,32 @@ representing a Table of data) or a pipe-delimited table.
       opts.separator "Perform sentiment analysis on a web query for keyword"
       opts.separator ""
       opts.separator "Google Engines:"
-      opts.on('-b', '--google-blog', 'Include Google Blog search') { 
+      opts.on('-b', '--google-blog', 'Include Google Blog search') {
               options.engines << :google_blog }
-      opts.on('-f', '--google-finance', 'Include Google Finance search') { 
+      opts.on('-f', '--google-finance', 'Include Google Finance search') {
               options.engines << :google_finance }
-      opts.on('-n', '--google-news', 'Include Google News search') { 
+      opts.on('-n', '--google-news', 'Include Google News search') {
               options.engines << :google_news }
 
       opts.separator "Yahoo Engines:"
-      opts.on('-F', '--yahoo-finance', 'Include Yahoo Finance search') { 
+      opts.on('-F', '--yahoo-finance', 'Include Yahoo Finance search') {
               options.engines << :yahoo_finance }
-      opts.on('-I', '--yahoo-inplay', 'Include Yahoo InPlay search') { 
+      opts.on('-I', '--yahoo-inplay', 'Include Yahoo InPlay search') {
               options.engines << :yahoo_inplay }
-      opts.on('-N', '--yahoo-news', 'Include Yahoo News search') { 
+      opts.on('-N', '--yahoo-news', 'Include Yahoo News search') {
               options.engines << :yahoo_news }
       #opts.on('-t', '--twitter', 'Twitter') { options.engines << :twitter }
 
       opts.separator "Summary Options:"
-      opts.on('-m', '--median', 'Calculate median') { 
+      opts.on('-m', '--median', 'Calculate median') {
               options.summary_func = 'median' }
-      opts.on('-M', '--mean', 'Calculate mean') { 
+      opts.on('-M', '--mean', 'Calculate mean') {
               options.summary_func = 'mean' }
 
       opts.separator "Output Options:"
-      opts.on('-p', '--pipe-delim', 'Print pipe-delimited table output') { 
+      opts.on('-p', '--pipe-delim', 'Print pipe-delimited table output') {
               options.output = :pipe_table }
-      opts.on('-r', '--raw', 'Serialize output as a Hash, not an Array') { 
+      opts.on('-r', '--raw', 'Serialize output as a Hash, not an Array') {
               options.output = :json_raw }
 
       opts.separator "Misc Options:"
@@ -241,8 +241,8 @@ end
 __END__
 
 # Notes:
-Subjectivity indicates proportion of sentiment to frequency of occurrence, 
-while polarity indicates percentage of positive sentiment references among 
+Subjectivity indicates proportion of sentiment to frequency of occurrence,
+while polarity indicates percentage of positive sentiment references among
 total sentiment references.
 
 polarity:               p - n / p + n

@@ -1,0 +1,19 @@
+GIT
+  remote: git://github.com/visionmedia/google-search.git
+  revision: a830525a87268132e0701fcf7f96e9c1a2f11e77
+  specs:
+    google-search (1.0.3)
+      json
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    json (1.8.1)
+    rsruby (0.5.1.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  google-search!
+  rsruby
