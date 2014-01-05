@@ -31,13 +31,13 @@ web_corpus = r.eval_R("corpus <- WebCorpus(GoogleNewsSource('#{ARGV[0]}'))")
 r.eval_R('corpus <- score(corpus)')
 meta_corpus = r.eval_R('meta(corpus)')
 
-web_corpus.each_with_index { |article, i|
+web_corpus.each_with_index { |body, i|
   date = r.eval_R("meta(corpus[[#{i+1}]], 'DateTimeStamp')")
   article = Article.new(
     url: r.eval_R("meta(corpus[[#{i+1}]], 'Origin')"),
     published_on: "#{date['mday']}/#{date['mon']+1}/#{date['year']+1900}",
     title: r.eval_R("meta(corpus[[#{i+1}]], 'Heading')"),
-    body: article.force_encoding('UTF-8'),
+    body: body.force_encoding('UTF-8'),
     polarity: check_nan(meta_corpus['polarity'][i]),
     subjectivity: check_nan(meta_corpus['subjectivity'][i]),
     pos_refs_per_ref: check_nan(meta_corpus['pos_refs_per_ref'][i]),
