@@ -16,6 +16,11 @@ class Article < ActiveRecord::Base
   validates :url, uniqueness: true, length: {maximum: 1023}
   validates :title, length: {maximum: 255}
   validates :source, length: {maximum: 255}
+  validates :polarity, numericality: {greater_than: 0}
+  validates :subjectivity, numericality: {greater_than: 0}
+  validates :pos_refs_per_ref, numericality: {greater_than: 0}
+  validates :neg_refs_per_ref, numericality: {greater_than: 0}
+  validates :senti_diffs_per_ref, numericality: {greater_than: 0}
 end
 
 def check_nan(nan)
