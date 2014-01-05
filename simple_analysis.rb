@@ -1,4 +1,7 @@
 #!/usr/bin/env ruby
+
+Dir.chdir File.dirname(__FILE__)
+
 require 'yaml'
 require 'bundler'
 Bundler.require
