@@ -48,5 +48,4 @@ web_corpus.each_with_index { |article, i|
   )
   article.save if ARGV[1] == 'save'
   puts article.to_yaml
-  article
 }
