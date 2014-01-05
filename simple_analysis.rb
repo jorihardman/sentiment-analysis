@@ -3,12 +3,14 @@ require 'yaml'
 require 'bundler'
 Bundler.require
 
-ActiveRecord::Base.establish_connection(
-  adapter: 'mysql2',
-  database: 'sentiment_analysis',
-  username: 'sentiment',
-  password: 'sentiment.analysis!'
-)
+unless ARGV[1].nil?
+  ActiveRecord::Base.establish_connection(
+    adapter: 'mysql2',
+    database: ARGV[1],
+    username: 'sentiment',
+    password: 'sentiment.analysis!'
+  )
+end
 
 class Article < ActiveRecord::Base
   validates :url, uniqueness: true, length: {maximum: 1023}
@@ -46,6 +48,6 @@ web_corpus.each_with_index { |body, i|
     senti_diffs_per_ref: check_nan(meta_corpus['neg_refs_per_ref'][i])
   )
   article.source = article.title.match(/ - (.+?)\z/)[1]
-  article.save if ARGV[1] == 'save'
+  article.save unless ARGV[1].nil?
   puts article.to_yaml
 }
