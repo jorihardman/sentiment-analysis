@@ -9,7 +9,6 @@ r = RSRuby.instance
 
 r.eval_R("suppressMessages(library('tm.plugin.webmining'))")
 r.eval_R("suppressMessages(library('tm.plugin.sentiment'))")
-
 web_corpus = r.eval_R("corpus <- WebCorpus(GoogleNewsSource('#{ARGV[0]}'))")
 r.eval_R('corpus <- score(corpus)')
 meta_corpus = r.eval_R('meta(corpus)')
@@ -20,7 +19,7 @@ puts web_corpus.map { |article|
   date = r.eval_R("meta(corpus[[#{i+1}]], 'DateTimeStamp')")
   {
     url: r.eval_R("meta(corpus[[#{i+1}]], 'Origin')"),
-    date: "#{date['mon']}/#{date['mday']}/#{date['year']}",
+    date: "#{date['mon']+1}/#{date['mday']}/#{date['year']+1900}",
     title: r.eval_R("meta(corpus[[#{i+1}]], 'Heading')"),
     text: article.force_encoding('UTF-8'),
     polarity: meta_corpus['polarity'][i],
