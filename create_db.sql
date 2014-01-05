@@ -24,9 +24,9 @@ DROP TABLE IF EXISTS `articles`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `articles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `url` varchar(255) DEFAULT NULL,
+  `url` varchar(1023) DEFAULT NULL,
   `published_on` date DEFAULT NULL,
-  `title` varchar(255) DEFAULT NULL,
+  `title` varchar(1023) DEFAULT NULL,
   `body` text,
   `polarity` double DEFAULT NULL,
   `subjectivity` double DEFAULT NULL,
