@@ -35,7 +35,7 @@ meta_corpus = r.eval_R('meta(corpus)')
 
 web_corpus.each_with_index { |article, i|
   date = r.eval_R("meta(corpus[[#{i+1}]], 'DateTimeStamp')")
-  Article.create(
+  article = Article.new(
     url: r.eval_R("meta(corpus[[#{i+1}]], 'Origin')"),
     published_on: "#{date['mday']}/#{date['mon']+1}/#{date['year']+1900}",
     title: r.eval_R("meta(corpus[[#{i+1}]], 'Heading')"),
@@ -46,4 +46,7 @@ web_corpus.each_with_index { |article, i|
     neg_refs_per_ref: check_nan(meta_corpus['neg_refs_per_ref'][i]),
     senti_diffs_per_ref: check_nan(meta_corpus['neg_refs_per_ref'][i])
   )
+  article.save if ARGV[1] == 'save'
+  puts article.to_yaml
+  article
 }
