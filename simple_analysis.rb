@@ -1,6 +1,4 @@
 #!/usr/bin/env ruby
-
-require 'stringio'
 require 'yaml'
 require 'bundler'
 Bundler.require
