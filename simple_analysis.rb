@@ -12,7 +12,8 @@ ActiveRecord::Base.establish_connection(
 
 class Article < ActiveRecord::Base
   validates :url, uniqueness: true, length: {maximum: 1023}
-  validates :title, length: {maximum: 2023}
+  validates :title, length: {maximum: 255}
+  validates :source, length: {maximum: 255}
 end
 
 def check_nan(nan)
@@ -44,6 +45,7 @@ web_corpus.each_with_index { |body, i|
     neg_refs_per_ref: check_nan(meta_corpus['neg_refs_per_ref'][i]),
     senti_diffs_per_ref: check_nan(meta_corpus['neg_refs_per_ref'][i])
   )
+  article.source = article.title.match(/ - (.+?)\z/)[1]
   article.save if ARGV[1] == 'save'
   puts article.to_yaml
 }
