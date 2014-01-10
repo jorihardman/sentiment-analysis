@@ -9,6 +9,7 @@ Bundler.require
 unless ARGV[1].nil?
   ActiveRecord::Base.establish_connection(
     adapter: 'mysql2',
+    enconding: 'utf8',
     database: ARGV[1],
     username: 'sentiment',
     password: 'sentiment.analysis!'
